@@ -60,7 +60,6 @@ public class BondManager {
                     int year = calendar.get(Calendar.YEAR);
                     int month = calendar.get(Calendar.MONTH) + 1;
                     int day = calendar.get(Calendar.DAY_OF_MONTH);
-                    day=28;
                     List<BondModel> bondList = new ArrayList<>();
                     while (matcher.find()) {
                         String groupData = matcher.group(0);
