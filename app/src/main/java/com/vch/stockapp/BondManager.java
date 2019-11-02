@@ -61,6 +61,7 @@ public class BondManager {
                     int month = calendar.get(Calendar.MONTH) + 1;
                     int day = calendar.get(Calendar.DAY_OF_MONTH);
                     List<BondModel> bondList = new ArrayList<>();
+                    boolean hasFound = false;
                     while (matcher.find()) {
                         String groupData = matcher.group(0);
                         if (groupData == null) {
@@ -92,6 +93,7 @@ public class BondManager {
 
                             if (Integer.parseInt(yearStr) == year && Integer.parseInt(monthStr) == month
                                     && Integer.parseInt(dayStr) == day) {
+                                hasFound = true;
                                 BondModel bondModel = new BondModel(bondcode, sname, startdate, correscode
                                         , swapscode, securityshortname);
                                 bondList.add(bondModel);
@@ -101,7 +103,9 @@ public class BondManager {
                                         + "; 正股代码："+swapscode + "; 正股简称：" + securityshortname);
 
                             } else { //由于可转债时间的顺序是按时间逆序的，因此一旦找不到则后面也再找不到了
-                                break;
+                                if (hasFound) {
+                                    break;
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
